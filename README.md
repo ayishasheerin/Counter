@@ -23,7 +23,7 @@ The project focuses on spreading kindness through words and creating a simple, u
 
 The application features a message input area, a character counter, and a Send Message button, with a green background and a clean layout.
 
-Project Link: 
+Project Link: https://ayishasheerin.github.io/Counter/
 
 🎯 Purpose
 
