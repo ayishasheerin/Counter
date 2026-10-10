@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous Message</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: rgb(187, 233, 230);
+            color: #17324D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            min-width: 0;
+        }
+
+
+        h1 {
+            font-size: 44px;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #637A91;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .message_card {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            background-color: #FFFFFF;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(23, 50, 77, 0.08);
+        }
+
+        label {
+            display: block;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        textarea {
+            display: flex;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            height: 160px;
+            padding: 15px;
+            border: 1px solid #C8D6DF;
+            border-radius: 12px;
+            background-color: #FCFDFB;
+            font-size: 16px;
+            color: #17324D;
+            box-sizing: border-box;
+            
+    
+        }
+
+        textarea:focus {
+            border-color: #56877E;
+            box-shadow: 0 0 0 3px rgba(86, 135, 126, 0.12);
+        }
+
+        .counter {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            color: #637A91;
+            font-size: 13px;
+        }
+
+        #counter {
+            font-weight: bold;
+            color: #286D77;
+        }
+
+        #warning {
+            color: #C0392B;
+            font-size: 14px;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        #sendBtn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 15px;
+            background-color: #56877E;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+
+        }
+
+        #sendBtn:hover:not(:disabled) {
+            background-color: #426F67;
+        }
+
+        #sendBtn:disabled {
+            background-color: #AABEB9;
+            cursor: not-allowed;
+        }
+
+    
+
+        .success_overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(23, 50, 77, 0.4);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .success_box {
+            width: 100%;
+            max-width: 380px;
+            background-color: white;
+            padding: 35px 25px;
+            border-radius: 22px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(23, 50, 77, 0.18);
+        
+        }
+
+        .success_icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background-color: #DDEBDD;
+            color: #426F67;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+        }
+
+        .success_box h2 {
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .success_box p {
+            color: #637A91;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        #closePopup {
+            width: 100%;
+            padding: 14px;
+            background-color: #56877E;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #closePopup:hover {
+            background-color: #426F67;
+        }
+
+    
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 34px;
+            }
+
+            body {
+                padding: 18px;
+            }
+
+            .message_card {
+                padding: 18px;
+            }
+
+            .success_box {
+                padding: 28px 22px;
+            }
+            .textarea{
+                width:100%;
+                font-size: 15px;
+                margin: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        
+
+        <h1>A liitle Message,
+            <br>Can make a big day.</h1>
+
+        <p class="description">
+            Send an anonymous message to someone special.
+            <br>
+            Kind words. Real impact.
+        </p>
+
+        <div class="message_box">
+
+            <label class="message">Your Message</label>
+
+            <textarea
+                id="message"
+                placeholder="Write your message here..."
+            ></textarea>
+
+            <div class="counter">
+                <span id="counter">0/200 characters</span>
+                <span>200 characters max</span>
+            </div>
+
+            <p id="warning"></p>
+
+            <button id="sendBtn" type="button" disabled>
+                ➤ Send Message
+            </button>
+
+        </div>
+
+    </div>
+
+   
+    <div class="success_overlay" id="successPopup">
+        <div class="success_box">
+
+            <div class="success_icon">✓</div>
+
+            <h2>Message Sent!</h2>
+
+            <p>Your kind words have been shared anonymously.</p>
+
+            <button id="closePopup" type="button">
+                Continue
+            </button>
+
+        </div>
+    </div>
+
+    <script>
+        var message = document.getElementById("message")
+        var counter = document.getElementById("counter")
+        var warning = document.getElementById("warning")
+        var sendBtn = document.getElementById("sendBtn")
+        var successPopup = document.getElementById("successPopup")
+        var closePopup = document.getElementById("closePopup")
+
+        var maxCharacters = 200
+
+        message.addEventListener("input", function() {
+
+            var typedCharacters = message.value.length
+
+            counter.textContent =
+                typedCharacters + "/200 characters"
+
+            if (typedCharacters > maxCharacters) {
+
+                warning.textContent =
+                    "You are exceeding the limit! You can write only 200 characters."
+
+                sendBtn.disabled = true
+
+            } else if (message.value === "") {
+
+                sendBtn.disabled = true
+
+            } else {
+
+                sendBtn.disabled = false
+
+            }
+        });
+
+     
+        sendBtn.addEventListener("click", function() {
+
+            var typedCharacters = message.value.length
+
+            if (typedCharacters === 0 ||
+                message.value === "") {
+
+            }
+
+            if (typedCharacters > maxCharacters) {
+
+                warning.textContent =
+                    "You are exceeding the limit! You can write only 200 characters."
+
+                sendBtn.disabled = true
+
+                return;
+            }
+
+            successPopup.style.display = "flex"
+
+            message.value = ""
+
+            counter.textContent = "0/200 characters"
+
+            warning.textContent = ""
+
+            sendBtn.disabled = true
+
+        });
+
+
+        closePopup.addEventListener("click", function() {
+
+            successPopup.style.display = "none"
+
+        });
+    </script>
+
+</body>
+</html>
